@@ -31,7 +31,6 @@
     [[UINavigationBar appearance] setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
     
 
-
     
     return YES;
 }
@@ -63,13 +62,19 @@
                 
             case UIEventSubtypeRemoteControlNextTrack:
                 [queuePlayer seekToTime:queuePlayer.currentItem.duration];
+                
+                currentInx = [self.playlistData indexOfObject:queuePlayer.currentItem];
+                
+                [self setNowPlayingInfo:currentInx];
+                
                 break;
             case UIEventSubtypeRemoteControlPreviousTrack:
                 
                 [queuePlayer pause];
                 
                 currentInx = [self.playlistData indexOfObject:queuePlayer.currentItem];
-
+                [self setNowPlayingInfo:currentInx];
+                
                 tmpPlayListData = [[NSMutableArray alloc] initWithArray:[self.playlistData subarrayWithRange:NSMakeRange(currentInx-1, [self.playlistData count]-(currentInx-1))]];
 
                 NSLog(@"tmpPlayListData count = %d", [tmpPlayListData count]);
@@ -78,7 +83,6 @@
                 for (int i=0; i<[tmpPlayListData count]; i++) {
                     [queuePlayer insertItem:[tmpPlayListData objectAtIndex:i] afterItem:nil];
                 }
-
                 [queuePlayer seekToTime:kCMTimeZero];
                 [queuePlayer play];
                 
@@ -89,6 +93,46 @@
         }
 
     }
+}
+
+-(void)setNowPlayingInfo:(int)currentInx{
+
+    Class playingInfoCenter = NSClassFromString(@"MPNowPlayingInfoCenter");
+    
+    if (playingInfoCenter) {
+        
+        
+        if (currentInx == 1) {
+        
+            NSMutableDictionary *songInfo = [[NSMutableDictionary alloc] init];
+            
+            MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageNamed:@"cover1"]];
+            
+            [songInfo setObject:@"music title" forKey:MPMediaItemPropertyTitle];
+            [songInfo setObject:@"author" forKey:MPMediaItemPropertyArtist];
+            [songInfo setObject:@"album title" forKey:MPMediaItemPropertyAlbumTitle];
+            [songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];
+            
+            [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];
+            
+        }else{
+        
+            NSMutableDictionary *songInfo = [[NSMutableDictionary alloc] init];
+            
+            MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageNamed:@"cover2"]];
+            
+            [songInfo setObject:@"music title 2" forKey:MPMediaItemPropertyTitle];
+            [songInfo setObject:@"author 2" forKey:MPMediaItemPropertyArtist];
+            [songInfo setObject:@"album title 2" forKey:MPMediaItemPropertyAlbumTitle];
+            [songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];
+            
+            [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];
+            
+        }
+        
+        
+    }
+
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

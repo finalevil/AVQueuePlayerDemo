@@ -44,6 +44,10 @@
                repeats:YES];
     
     [appDelegate.queuePlayer play];
+
+//    MPNowPlayingInfoCenter
+    [appDelegate.queuePlayer setAllowsAirPlayVideo:YES];
+
     
 }
 

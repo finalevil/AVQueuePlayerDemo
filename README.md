@@ -229,3 +229,53 @@ queue count = 0表示播放完畢。我們可以再次將影片列表加入queue
     [queuePlayer play];
 }
 ```
+
+### 9.enable AirPlay support
+
+```
+[appDelegate.queuePlayer setAllowsAirPlayVideo:YES];
+```
+
+### 10. in lock screen mode, to display "now playing" information
+(1)available iOS 5.0 later
+(2)add MediaPlayer.framework
+(3)include MediaPlayer.h
+
+```
+#import <MediaPlayer/MediaPlayer.h>
+```
+
+(4)call the "MPNowPlayingInfoCenter", when the video/song change
+
+```
+-(void)setNowPlayingInfo:(int)currentInx{
+
+    Class playingInfoCenter = NSClassFromString(@"MPNowPlayingInfoCenter");
+    
+    if (playingInfoCenter) {
+        
+        NSMutableDictionary *songInfo = [[NSMutableDictionary alloc] init];
+        
+        MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageNamed:@"cover1"]];
+        
+        [songInfo setObject:@"music title" forKey:MPMediaItemPropertyTitle];
+        [songInfo setObject:@"author" forKey:MPMediaItemPropertyArtist];
+        [songInfo setObject:@"album title" forKey:MPMediaItemPropertyAlbumTitle];
+        [songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];
+        
+        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];
+        
+    }
+
+}
+```
+
+需要特別注意的是，以下這個部分是用來檢查 "MPNowPlayingInfoCenter" 這個class是否存在，因為在iOS 5.0之前的版本是不支援這個功能的(也就是這個class不存在)
+
+```
+Class playingInfoCenter = NSClassFromString(@"MPNowPlayingInfoCenter");
+    
+if (playingInfoCenter) {
+}
+```
+
