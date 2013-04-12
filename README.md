@@ -214,3 +214,18 @@ queue count = 0表示播放完畢。我們可以再次將影片列表加入queue
     }
 }
 ```
+
+
+###8. handle the interrupt,when phone call
+
+(1)set the delegate
+
+(2)當結束interrupt的狀況後，會fire endInterruptionWithFlags 函式。
+
+```
+- (void)endInterruptionWithFlags:(NSUInteger)flags {
+
+    //check the status, then play
+    [queuePlayer play];
+}
+```
