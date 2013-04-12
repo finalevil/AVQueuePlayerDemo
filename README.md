@@ -1,7 +1,8 @@
 AVQueuePlayerDemo
 =================
 
-in AppDelegate 宣告 AVQueuePlayer
+([welcome to visit my blog: http://blog.finalevil.com])
+在 AppDelegate 宣告 AVQueuePlayer
 
 ###1. include 3 framework
 
@@ -204,11 +205,6 @@ queue count = 0表示播放完畢。我們可以再次將影片列表加入queue
 
         switch (event.subtype) {
             case UIEventSubtypeRemoteControlTogglePlayPause:
-                NSLog(@"%d", queuePlayer.currentItem.status);
-                [queuePlayer pause];
-                break;
-            case UIEventSubtypeRemoteControlPause:
-                [queuePlayer pause];
                 break;
             default:
                 break;

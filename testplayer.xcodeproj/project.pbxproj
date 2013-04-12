@@ -31,7 +31,7 @@
 		869670C2171685A2006161BE /* 7.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 869670B7171685A2006161BE /* 7.mp4 */; };
 		869670C3171685A2006161BE /* 8.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 869670B8171685A2006161BE /* 8.mp4 */; };
 		869670C4171685A2006161BE /* 9.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 869670B9171685A2006161BE /* 9.mp4 */; };
-		869F85641717FD3800985B68 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 869F85631717FD3800985B68 /* README.md */; };
+		869F85661717FE8300985B68 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 869F85651717FE8300985B68 /* README.md */; };
 		86F315B7171587BC0063C522 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F315B6171587BC0063C522 /* CoreMedia.framework */; };
 		86FBD71F1715726800D987FE /* list_bullets.png in Resources */ = {isa = PBXBuildFile; fileRef = 86FBD71E1715726800D987FE /* list_bullets.png */; };
 		86FBD726171573F300D987FE /* menubar.png in Resources */ = {isa = PBXBuildFile; fileRef = 86FBD724171573F200D987FE /* menubar.png */; };
@@ -73,7 +73,7 @@
 		869670B7171685A2006161BE /* 7.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 7.mp4; sourceTree = "<group>"; };
 		869670B8171685A2006161BE /* 8.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 8.mp4; sourceTree = "<group>"; };
 		869670B9171685A2006161BE /* 9.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 9.mp4; sourceTree = "<group>"; };
-		869F85631717FD3800985B68 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		869F85651717FE8300985B68 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		86F315B6171587BC0063C522 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		86FBD71E1715726800D987FE /* list_bullets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_bullets.png; sourceTree = "<group>"; };
 		86FBD724171573F200D987FE /* menubar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menubar.png; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 		86386CEB171527D90041E581 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				869F85631717FD3800985B68 /* README.md */,
+				869F85651717FE8300985B68 /* README.md */,
 				86386CFC171527D90041E581 /* MainStoryboard.storyboard */,
 				86386CEC171527D90041E581 /* testplayer-Info.plist */,
 				86386CED171527D90041E581 /* InfoPlist.strings */,
@@ -263,7 +263,7 @@
 				869670C2171685A2006161BE /* 7.mp4 in Resources */,
 				869670C3171685A2006161BE /* 8.mp4 in Resources */,
 				869670C4171685A2006161BE /* 9.mp4 in Resources */,
-				869F85641717FD3800985B68 /* README.md in Resources */,
+				869F85661717FE8300985B68 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
