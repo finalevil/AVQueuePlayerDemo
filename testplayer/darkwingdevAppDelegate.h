@@ -7,9 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface darkwingdevAppDelegate : UIResponder <UIApplicationDelegate>
+
+@interface darkwingdevAppDelegate : UIResponder <UIApplicationDelegate> {
+
+    
+}
+
+@property (nonatomic, retain) NSMutableArray *playlistData;
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, retain) AVQueuePlayer *queuePlayer;
 
 @end

@@ -7,13 +7,78 @@
 //
 
 #import "darkwingdevAppDelegate.h"
+#import "darkwingdevViewController.h"
 
 @implementation darkwingdevAppDelegate
+
+@synthesize queuePlayer;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [[AVAudioSession sharedInstance] setActive: YES error: nil];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [self becomeFirstResponder];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
+    
+    UIImage *navBarImage = [[UIImage imageNamed:@"menubar-left.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 15, 5, 15)];
+    
+    [[UINavigationBar appearance] setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
+    
+
+
+    
     return YES;
+}
+
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event {
+    
+    NSLog(@"%@", event);
+    
+    int currentInx;
+    NSMutableArray *tmpPlayListData;
+    if (event.type == UIEventTypeRemoteControl) {
+
+        switch (event.subtype) {
+            case UIEventSubtypeRemoteControlTogglePlayPause:                
+                NSLog(@"queuePlayer.rate = %f", queuePlayer.rate);
+                
+                if(queuePlayer.rate != 0)
+                    [queuePlayer pause];
+                else
+                    [queuePlayer play];                
+                break;
+                
+            case UIEventSubtypeRemoteControlNextTrack:
+                [queuePlayer seekToTime:queuePlayer.currentItem.duration];
+                break;
+            case UIEventSubtypeRemoteControlPreviousTrack:
+                
+                [queuePlayer pause];
+                
+                currentInx = [self.playlistData indexOfObject:queuePlayer.currentItem];
+
+                tmpPlayListData = [[NSMutableArray alloc] initWithArray:[self.playlistData subarrayWithRange:NSMakeRange(currentInx-1, [self.playlistData count]-(currentInx-1))]];
+
+                NSLog(@"tmpPlayListData count = %d", [tmpPlayListData count]);
+                [queuePlayer seekToTime:kCMTimeZero];
+                [queuePlayer removeAllItems];
+                for (int i=0; i<[tmpPlayListData count]; i++) {
+                    [queuePlayer insertItem:[tmpPlayListData objectAtIndex:i] afterItem:nil];
+                }
+
+                [queuePlayer seekToTime:kCMTimeZero];
+                [queuePlayer play];
+                
+                break;
+                
+            default:
+                break;
+        }
+
+    }
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -22,11 +87,18 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
+-(void)resumePlayback {
+//    MainViewController* mainController=self.viewController;
+//    if (mainController.player.rate==0&&playerWasPlaying)
+//        [mainController play:nil];
+    [queuePlayer play];
+}
+
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(resumePlayback) userInfo:nil repeats:NO];
 }
+
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
