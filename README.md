@@ -2,6 +2,7 @@ AVQueuePlayerDemo
 =================
 
 (welcome to visit my blog: http://blog.finalevil.com)
+
 在 AppDelegate 宣告 AVQueuePlayer
 
 ###1. include 3 framework
