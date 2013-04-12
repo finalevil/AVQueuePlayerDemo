@@ -7,7 +7,7 @@
 //
 
 #import "darkwingdevViewController.h"
-#define VIDEO_NUM 3
+#define VIDEO_NUM 11
 
 @interface darkwingdevViewController ()
 

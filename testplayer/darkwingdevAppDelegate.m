@@ -18,6 +18,9 @@
     // Override point for customization after application launch.
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     [[AVAudioSession sharedInstance] setActive: YES error: nil];
+    
+    [[AVAudioSession sharedInstance] setDelegate: self];
+    
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [self becomeFirstResponder];
     
@@ -32,6 +35,13 @@
     
     return YES;
 }
+
+- (void)endInterruptionWithFlags:(NSUInteger)flags {
+
+    //check the status, then play
+    [queuePlayer play];
+}
+
 
 - (void)remoteControlReceivedWithEvent:(UIEvent *)event {
     
